@@ -17,8 +17,12 @@
 		"test:e2e": "playwright test"
 	},
 	"devDependencies": {
+		"@egoist/tailwindcss-icons": "^1.9.0",
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.39.1",
+		"@iconify-json/tabler": "^1.2.23",
+		"@iconify/json": "^2.2.415",
+		"@iconify/tailwind4": "^1.2.0",
 		"@playwright/test": "^1.56.1",
 		"@sveltejs/adapter-vercel": "^6.1.1",
 		"@sveltejs/kit": "^2.48.5",

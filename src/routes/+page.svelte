@@ -150,11 +150,11 @@ X: https://x.com/HokugoW
 					onchange={() => toggleDarkMode()}
 				>
 				<span class="pointer-events-none pr-1 w-8 h-8">
-					<i class="i-tabler-sun w-full h-full dark:text-gray-100"></i>
+					<i class="icon-[tabler--sun] w-full h-full dark:text-gray-100"></i>
 				</span>
 				<div class="relative w-16 h-8 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
 				<span class="pointer-events-none pl-1 w-8 h-8">
-					<i class="i-tabler-moon w-full h-full dark:text-gray-100"></i>
+					<i class="icon-[tabler--moon] w-full h-full dark:text-gray-100"></i>
 				</span>
 			</label>
 		</div>
