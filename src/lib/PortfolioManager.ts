@@ -139,6 +139,7 @@ export class PortfolioManager {
             child.children.forEach(child => {
               if (child instanceof THREE.Mesh) {
                 child.receiveShadow = true;
+                child.castShadow = true;
               }
             });
           }
@@ -395,16 +396,19 @@ export class PortfolioManager {
           child.intensity = !this.isDarkMode ? 1 : 0;
         }
         child.castShadow = child.name === 'light_key' ? true : false;
+        child.shadow.bias = -0.0001;
       }
       // ダークモード用篝火ライトの初期値
       if (child.name.includes('kagaribi')) {
         child.visible = this.isDarkMode;
         child.children.filter((pointLight: THREE.Object3D) => pointLight instanceof THREE.PointLight).forEach((light: THREE.PointLight) => {
           light.intensity = 1;
+          light.distance = 5;
           light.decay = 2;
           light.castShadow = true;
           light.position.y += 0.05;
           light.position.z += 0.1;
+          light.shadow.bias = 0.008;
         });
       }
     });
