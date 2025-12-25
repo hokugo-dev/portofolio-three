@@ -23,20 +23,21 @@ export class PortfolioManager {
   spriteObj: THREE.Sprite | null = null;
   isDarkMode: boolean = false;
   stats: Stats | null = null;
+  showDebug: boolean = false;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
     this.portfolioText = portfolioText;
     this.boardList = boardList;
     this.stats = new Stats();
+    this.showDebug = false;
   }
 
   async generate(onComplete?: () => void) {
     try {
       this.isLoading = true;
 
-      const showDebug = false;
-      if (this.stats && showDebug) {
+      if (this.stats && this.showDebug) {
         window.document.body.appendChild(this.stats.dom);
       }
       
@@ -257,6 +258,9 @@ export class PortfolioManager {
 
       if (this.stats) {
         this.stats.update();
+      }
+      if (this.showDebug) {
+        console.log(this.renderer?.info.render.calls);
       }
       if (this.renderer && this.scene && this.camera) {
         this.renderer.render(this.scene, this.camera);
