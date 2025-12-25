@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { portfolioText, boardList, logoList } from './portfolioData.js';
+import Stats from 'three/examples/jsm/libs/stats.module.js';
 
 export class PortfolioManager {
   canvas: HTMLCanvasElement;
@@ -21,16 +22,24 @@ export class PortfolioManager {
   onWheelChange?: (wheel: number) => void;
   spriteObj: THREE.Sprite | null = null;
   isDarkMode: boolean = false;
+  stats: Stats | null = null;
+  showDebug: boolean = false;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
     this.portfolioText = portfolioText;
     this.boardList = boardList;
+    this.stats = new Stats();
+    this.showDebug = false;
   }
 
   async generate(onComplete?: () => void) {
     try {
       this.isLoading = true;
+
+      if (this.stats && this.showDebug) {
+        window.document.body.appendChild(this.stats.dom);
+      }
       
       // 既存のレンダラーをクリーンアップ
       if (this.renderer) {
@@ -247,6 +256,12 @@ export class PortfolioManager {
 
       this.animationId = requestAnimationFrame(animate);
 
+      if (this.stats) {
+        this.stats.update();
+      }
+      if (this.showDebug) {
+        console.log(this.renderer?.info.render.calls);
+      }
       if (this.renderer && this.scene && this.camera) {
         this.renderer.render(this.scene, this.camera);
       }
