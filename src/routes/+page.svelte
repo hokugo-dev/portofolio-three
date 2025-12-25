@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { PortfolioManager } from '$lib/PortfolioManager';
-
 	let canvas: HTMLCanvasElement;
 	let portfolioManager: PortfolioManager | null = null;
 	let isLoading = $state(true);
