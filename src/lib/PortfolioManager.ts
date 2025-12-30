@@ -20,7 +20,7 @@ export class PortfolioManager {
   portfolioText: string[][] = [];
   boardList: string[][] = [];
   onWheelChange?: (wheel: number) => void;
-  spriteObj: THREE.Sprite | null = null;
+  spriteObj: THREE.Sprite[] | null = [];
   isDarkMode: boolean = false;
   stats: Stats | null = null;
   showDebug: boolean = false;
@@ -152,6 +152,14 @@ export class PortfolioManager {
               }
             });
           }
+          if (child.name.includes('hori')) {
+            child.children.forEach(child => {
+              if (child instanceof THREE.Mesh) {
+                child.receiveShadow = true;
+                child.castShadow = false;
+              }
+            });
+          }
         });
 
         this.scene.add(this.gltfModel);
@@ -179,9 +187,9 @@ export class PortfolioManager {
           sprite.position.set(...position);
           sprite.scale.set(Number(boardItem[2]), Number(boardItem[2]), Number(boardItem[2]));
           this.scene!.add(sprite);
-          if (idx === 2) {
+          if (idx !== 1) {
             sprite.visible = false;
-            this.spriteObj = sprite;
+            this.spriteObj.push(sprite);
           }
         }
       }
@@ -208,9 +216,11 @@ export class PortfolioManager {
 
     // カメラが向くまで非表示のsprite切り替え
     if (this.wheel < 0) {
-      this.spriteObj!.visible = this.wheel > -1500;
+      this.spriteObj![0].visible = this.wheel > -1000;
+      this.spriteObj![1].visible = this.wheel > -1500;
     } else {
-      this.spriteObj!.visible = this.wheel > 2000;
+      this.spriteObj![0].visible = this.wheel > 1000;
+      this.spriteObj![1].visible = this.wheel > 2000;
     }
 
     this.mixer?.forEach(mixer => {
@@ -411,7 +421,7 @@ export class PortfolioManager {
           child.intensity = !this.isDarkMode ? 1 : 0;
         }
         child.castShadow = child.name === 'light_key' ? true : false;
-        child.shadow.bias = -0.0001;
+        child.shadow.bias = -0.0008;
       }
       // ダークモード用篝火ライトの初期値
       if (child.name.includes('kagaribi')) {
@@ -422,7 +432,7 @@ export class PortfolioManager {
           light.decay = 2;
           light.castShadow = true;
           light.position.y += 0.05;
-          light.position.z += 0.1;
+          light.position.z += 0.05;
           light.shadow.bias = 0.008;
         });
       }
