@@ -5,7 +5,7 @@ export const portfolioText: string[][] = [
 ];
 
 export const boardList: string[][] = [
-  ['board', 'z', '1'],
+  ['board', '-x', '1'],
   ['board001', 'xz', '1'],
   ['board_small', '-x', '0.75'],
 ];
